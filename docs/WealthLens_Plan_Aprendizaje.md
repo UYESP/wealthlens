@@ -1,3 +1,5 @@
+DEPRECATED - Replaced by v2
+
 # WealthLens — Plan de Aprendizaje
 **Aplicación de gestión de cartera financiera e inmobiliaria**  
 Versión 1.0 · Abril 2026
