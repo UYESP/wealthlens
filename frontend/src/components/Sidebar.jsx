@@ -1,13 +1,14 @@
+import { NavLink } from 'react-router-dom'
 import { LayoutDashboard, TrendingUp, Building2, ScanEye } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 
 const navItems = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'portfolio', label: 'Portfolio', icon: TrendingUp },
-  { id: 'inmuebles', label: 'Inmuebles', icon: Building2 },
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/portfolio', label: 'Portfolio', icon: TrendingUp },
+  { to: '/inmuebles', label: 'Inmuebles', icon: Building2 },
 ]
 
-export default function Sidebar({ currentPage, onNavigate }) {
+export default function Sidebar() {
   return (
     <aside className="flex h-screen w-60 flex-col bg-slate-900 text-slate-100">
       {/* Brand */}
@@ -26,19 +27,21 @@ export default function Sidebar({ currentPage, onNavigate }) {
           Menú
         </p>
         <ul className="space-y-0.5">
-          {navItems.map(({ id, label, icon: Icon }) => (
-            <li key={id}>
-              <button
-                onClick={() => onNavigate(id)}
-                className={`flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                  currentPage === id
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100'
-                }`}
+          {navItems.map(({ to, label, icon: Icon }) => (
+            <li key={to}>
+              <NavLink
+                to={to}
+                className={({ isActive }) =>
+                  `flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-indigo-600 text-white'
+                      : 'text-slate-400 hover:bg-slate-800 hover:text-slate-100'
+                  }`
+                }
               >
                 <Icon className="h-4 w-4 shrink-0" />
                 {label}
-              </button>
+              </NavLink>
             </li>
           ))}
         </ul>

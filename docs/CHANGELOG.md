@@ -123,17 +123,33 @@ docs: descripción        ← documentación
 
 ---
 
-## Próxima sesión — M3: React funcional y estado
+## Sesión 4 — M3 (parte 1): React Router
+*Mayo 2026*
 
-### Qué viene
-⏳ Añadir React Router para navegación real entre páginas  
-⏳ Implementar `useState` y `useContext` para estado global de la cartera  
+### Progreso
+✅ Instalación de `react-router-dom` (4 paquetes añadidos)  
+✅ `main.jsx` — app envuelta en `<BrowserRouter>`  
+✅ `App.jsx` — `useState` de navegación reemplazado por `<Routes>` + `<Route>`; redirect de `/` a `/dashboard`  
+✅ `Sidebar.jsx` — `<button onClick>` reemplazado por `<NavLink>`; props `currentPage`/`onNavigate` eliminados  
+✅ `Layout.jsx` — `useLocation()` para leer ruta activa y mostrar título; props de navegación eliminados  
+
+### Resultado
+La URL del browser ahora refleja la página activa (`/dashboard`, `/portfolio`, `/inmuebles`). El botón de atrás del navegador funciona. Recargar la página mantiene la sección correcta.
+
+### 🏛️ Decisión de arquitectura — URL como fuente de verdad
+**Decisión:** Migrar navegación de `useState` a React Router.  
+**Razón:** Con `useState`, la URL nunca cambiaba — el browser no tenía historial, compartir un link directo era imposible, y recargar volvía al inicio. React Router convierte la URL en la fuente de verdad del estado de navegación.  
+**Patrón aplicado:** `NavLink` detecta la ruta activa automáticamente (reemplaza la comparación manual `currentPage === id`). `useLocation()` en Layout lee la ruta sin necesidad de pasar props.  
+**Principio:** Single Source of Truth — la URL es el estado, no un `useState` interno.
+
+### Próxima sesión — M3 (continuación)
+⏳ Implementar `useContext` para estado global de la cartera  
 ⏳ CRUD completo en memoria: añadir, editar y borrar posiciones  
 ⏳ Formulario de alta de inmueble  
 ⏳ Cálculos automáticos: rentabilidad, totales, distribución porcentual  
 ⏳ Gráficos con Recharts: distribución por tipo de activo  
 
-### Patrón de arquitectura a cubrir en M3
+### Patrón de arquitectura pendiente en M3
 **Unidirectional Data Flow y State Management** — el patrón Flux, por qué los datos fluyen en una sola dirección en React, cuándo usar estado local vs estado global, trade-offs entre Context API / Redux / Zustand.
 
 ---
